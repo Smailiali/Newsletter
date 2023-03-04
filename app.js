@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 
 const bodyParser = require("body-parser");
@@ -7,6 +9,8 @@ const request = require("request");
 const https = require("https");
 
 const app = express();
+
+console.group("token", process.env.MAILCHIMP_API_TOKEN);
 
 app.use(express.static("public"));
 
@@ -36,7 +40,7 @@ app.post("/", (req, res) => {
 
     const options = {
         method: "post",
-        auth: "ali:cfc61385c3d4987a84d7a31a5025307f-us21"
+        auth: "ali:process.env.MAILCHIMP_API_TOKEN"
     }
         
     const request = https.request(url, options, function (response) {
